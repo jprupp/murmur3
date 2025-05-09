@@ -1,18 +1,19 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.38.0.
 --
 -- see: https://github.com/sol/hpack
 
 name:           murmur3
-version:        1.0.5
+version:        1.0.6
 synopsis:       Pure Haskell implementation of the MurmurHash3 x86 algorithm
 description:    MurmurHash3 is a non-cryptographic hash function suitable for general hash-based lookup. We provide the x86 version which closely follows  the following implementation: <https://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp>
 category:       Data, Hash, Murmur
 stability:      stable
 homepage:       https://github.com/haskoin/murmur3#readme
 bug-reports:    https://github.com/haskoin/murmur3/issues
-maintainer:     Jean-Pierre Rupp
+author:         JP Rupp
+maintainer:     jprupp@protonmail.ch
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
@@ -28,7 +29,6 @@ library
       Data.Hash.Murmur
   other-modules:
       Paths_murmur3
-  ghc-options: -Wall -Werror
   build-depends:
       base >=4.6 && <5
     , bytestring >=0.10
@@ -43,7 +43,6 @@ test-suite test-murmur3
       Paths_murmur3
   hs-source-dirs:
       tests
-  ghc-options: -Wall -Werror
   build-depends:
       HUnit
     , QuickCheck

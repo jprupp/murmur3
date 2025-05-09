@@ -1,5 +1,5 @@
 name: murmur3
-version: 1.0.5
+version: 1.0.6
 synopsis: Pure Haskell implementation of the MurmurHash3 x86 algorithm
 description: >
     MurmurHash3 is a non-cryptographic hash function suitable for general
@@ -8,7 +8,8 @@ description: >
     <https://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp>
 github: haskoin/murmur3
 stability: stable
-maintainer: Jean-Pierre Rupp
+author: JP Rupp
+maintainer: jprupp@protonmail.ch
 category: Data, Hash, Murmur
 extra-source-files:
   - README.md
