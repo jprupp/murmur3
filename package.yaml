@@ -13,6 +13,7 @@ maintainer: jprupp@protonmail.ch
 category: Data, Hash, Murmur
 extra-source-files:
   - README.md
+  - CHANGELOG.md
 dependencies:
   - base >= 4.6 && < 5
   - bytestring >= 0.10
