@@ -19,6 +19,10 @@ and the tags of each release.
 - A README like those of the Haskoin packages: what the hash is for, its
   design, examples that print the reference's hashes, its use in Bitcoin's
   Bloom filters, what it is not, and how it is tested and developed.
+- Haddock like that of the Haskoin packages: a module header with the
+  purpose of the hash, its design and when not to use it, and examples on
+  `murmur3` that give the reference's hashes, Bitcoin's Bloom filter seeds
+  among them. The steps of the code say what each does.
 - The description in `package.yaml` keeps its line breaks, so that the
   generated Cabal file has no line of 120 columns or more.
 - The links to the reference implementation point to SMHasher on GitHub,
