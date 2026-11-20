@@ -1,12 +1,12 @@
 name: murmur3
 version: 1.0.6
 synopsis: Pure Haskell implementation of the MurmurHash3 x86 algorithm
-description: >
+description: |
     MurmurHash3 is a non-cryptographic hash function suitable for general
-    hash-based lookup. We provide the x86 version which closely follows 
+    hash-based lookup. We provide the x86 version which closely follows
     the following implementation:
-    <https://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp>
-github: haskoin/murmur3
+    <https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp>
+github: jprupp/murmur3
 stability: stable
 author: JP Rupp
 maintainer: jprupp@protonmail.ch

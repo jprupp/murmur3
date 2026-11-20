@@ -16,6 +16,15 @@ and the tags of each release.
   the workflow that the Haskell packages of jprupp share in
   [jprupp/tools](https://github.com/jprupp/tools).
 - This changelog.
+- A README like those of the Haskoin packages: what the hash is for, its
+  design, examples that print the reference's hashes, its use in Bitcoin's
+  Bloom filters, what it is not, and how it is tested and developed.
+- The description in `package.yaml` keeps its line breaks, so that the
+  generated Cabal file has no line of 120 columns or more.
+- The links to the reference implementation point to SMHasher on GitHub,
+  since Google Code is gone, and the homepage, bug tracker and source
+  repository of the package are those of jprupp/murmur3, where the
+  repository lives now.
 
 ## [1.0.6] - 2025-05-09
 

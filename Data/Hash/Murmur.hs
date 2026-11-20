@@ -24,7 +24,7 @@ import Data.List (foldl')
 import Data.Word (Word32)
 
 -- | MurmurHash3 (x86_32). For more details, see
--- <http://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp>
+-- <https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp>
 murmur3 :: Word32         -- ^ Seed value
         -> BS.ByteString  -- ^ Strict bytestring data to hash
         -> Word32         -- ^ MurmurHash3 result
