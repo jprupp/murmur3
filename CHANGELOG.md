@@ -23,6 +23,7 @@ and the tags of each release.
   purpose of the hash, its design and when not to use it, and examples on
   `murmur3` that give the reference's hashes, Bitcoin's Bloom filter seeds
   among them. The steps of the code say what each does.
+- The code and the tests are formatted with ormolu (`haskell-format`).
 - The description in `package.yaml` keeps its line breaks, so that the
   generated Cabal file has no line of 120 columns or more.
 - The links to the reference implementation point to SMHasher on GitHub,

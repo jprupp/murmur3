@@ -58,25 +58,24 @@
 -- use SipHash or a cryptographic hash such as SHA-256.
 module Data.Hash.Murmur (murmur3) where
 
-import Control.Monad (replicateM )
-
-import Data.Serialize.Get 
-    ( runGet
-    , getWord32le
-    )
-import Data.Bits 
-    ( shiftR
-    , rotateL
-    , xor
-    )
-import qualified Data.ByteString as BS 
-    ( ByteString 
-    , length 
-    , drop
-    , append
-    , replicate
-    )
+import Control.Monad (replicateM)
+import Data.Bits
+  ( rotateL,
+    shiftR,
+    xor,
+  )
+import qualified Data.ByteString as BS
+  ( ByteString,
+    append,
+    drop,
+    length,
+    replicate,
+  )
 import Data.List (foldl')
+import Data.Serialize.Get
+  ( getWord32le,
+    runGet,
+  )
 import Data.Word (Word32)
 
 -- | The MurmurHash3 x86_32 hash of some bytes with a seed, as the
@@ -93,38 +92,42 @@ import Data.Word (Word32)
 -- 3021625566
 --
 -- The empty input with the seed 0 hashes to 0, as in the reference.
-murmur3 :: Word32         -- ^ seed
-        -> BS.ByteString  -- ^ the bytes to hash
-        -> Word32         -- ^ their hash
-murmur3 nHashSeed bs = 
-    h8
+murmur3 ::
+  -- | seed
+  Word32 ->
+  -- | the bytes to hash
+  BS.ByteString ->
+  -- | their hash
+  Word32
+murmur3 nHashSeed bs =
+  h8
   where
     -- The input is read as blocks of four bytes, little-endian, and a tail
     -- of up to three bytes that do not fill a block.
     !nBlocks = BS.length bs `quot` 4
-    !nTail   = BS.length bs `rem` 4
+    !nTail = BS.length bs `rem` 4
     -- The blocks, and the tail padded with zeros to a block of its own.
     -- Neither read can fail: there are exactly enough bytes for both.
-    Right blocks  = runGet (replicateM nBlocks getWord32le) bs
-    bsTail  = BS.drop (nBlocks*4) bs `BS.append` BS.replicate (4-nTail) 0
+    Right blocks = runGet (replicateM nBlocks getWord32le) bs
+    bsTail = BS.drop (nBlocks * 4) bs `BS.append` BS.replicate (4 - nTail) 0
     -- Body: each block is mixed into the state, from the seed.
-    !h1   = foldl' mix nHashSeed blocks
+    !h1 = foldl' mix nHashSeed blocks
     -- Tail: its bytes are scrambled as a block is, and added to the state
     -- without the rotation and multiplication that a block gets. An empty
     -- tail is a block of zeros, which changes nothing.
-    Right !t1   = runGet getWord32le bsTail
-    !t2   = t1 * c1
-    !t3   = t2 `rotateL` 15
-    !t4   = t3 * c2
-    !h2   = h1 `xor` t4
+    Right !t1 = runGet getWord32le bsTail
+    !t2 = t1 * c1
+    !t3 = t2 `rotateL` 15
+    !t4 = t3 * c2
+    !h2 = h1 `xor` t4
     -- Finalization: the length goes in, and the final mix makes every bit
     -- of the state depend on every bit of the input.
-    !h3   = h2 `xor` fromIntegral (BS.length bs)
-    !h4   = h3 `xor` (h3 `shiftR` 16) 
-    !h5   = h4 * 0x85ebca6b
-    !h6   = h5 `xor` (h5 `shiftR` 13)
-    !h7   = h6 * 0xc2b2ae35
-    !h8   = h7 `xor` (h7 `shiftR` 16)
+    !h3 = h2 `xor` fromIntegral (BS.length bs)
+    !h4 = h3 `xor` (h3 `shiftR` 16)
+    !h5 = h4 * 0x85ebca6b
+    !h6 = h5 `xor` (h5 `shiftR` 13)
+    !h7 = h6 * 0xc2b2ae35
+    !h8 = h7 `xor` (h7 `shiftR` 16)
     -- How a block goes into the state: it is scrambled with two
     -- multiplications and a rotation, added, and the state is rotated and
     -- multiplied in turn.
@@ -135,7 +138,7 @@ murmur3 nHashSeed bs =
         !k4 = k3 * c2
         !r2 = r1 `xor` k4
         !r3 = r2 `rotateL` 13
-        !r4 = r3*5 + 0xe6546b64
+        !r4 = r3 * 5 + 0xe6546b64
     -- The constants of the reference.
-    c1 = 0xcc9e2d51 
-    c2 = 0x1b873593 
+    c1 = 0xcc9e2d51
+    c2 = 0x1b873593
